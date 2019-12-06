@@ -27,7 +27,7 @@ namespace Hierarchy.NPCs
             Console.WriteLine($"{Owner.Name}'s Zombie Dead!");
         }
 
-        public void OnTurnEnd()
+        public void DecreaseCalltime()
         {
             CallTime--;
         }

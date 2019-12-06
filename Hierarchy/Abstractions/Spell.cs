@@ -1,13 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Hierarchy.Util;
 
-namespace Hierarchy
+namespace Hierarchy.Abstractions
 {
-    class Spell
+    abstract class Spell
     {
-        public int ManaCost { get; set; } //стоимость маны
+        public Character Caster { get; set; }
 
-        public int Cooldown { get; set; } //время перезарядки
+        public string SpellName { get; set; }
+
+        public int CurrentCoolDown { get; set; }
+
+        public int ManaCost { get; set; }
+        public int Cooldown { get; set; }
+        public SpellTarget SpellTarget { get; set; }
+        public int Range { get; set; }
+
+        public int Value { get; set; }
     }
 }

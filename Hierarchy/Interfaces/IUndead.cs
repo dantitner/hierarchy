@@ -10,6 +10,6 @@ namespace Hierarchy.Interfaces
 
         void Destroy();  //дефолтня реализация => убрать с поля боя
 
-        void OnTurnEnd(); //дефолтная реализация => CallTime--;
+        void DecreaseCalltime(); //дефолтная реализация => CallTime--;
     }
 }
