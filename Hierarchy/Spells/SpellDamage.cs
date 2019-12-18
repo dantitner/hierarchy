@@ -7,9 +7,9 @@ using Hierarchy.Util;
 
 namespace Hierarchy.Spells
 {
-    class S_Damage : Spell, ISpell
+    class SpellDamage : Spell, ICast
     {
-        public S_Damage(Character character)
+        public SpellDamage(Character character)
         {
             SpellName = "Fireball";
 

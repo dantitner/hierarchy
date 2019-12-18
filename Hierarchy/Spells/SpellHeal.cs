@@ -6,10 +6,10 @@ using Hierarchy.Util;
 using Hierarchy.Abstractions;
 namespace Hierarchy.Spells
 {
-    class S_Heal : Spell, ISpell
+    class SpellHeal : Spell, ICast
     {
 
-        public S_Heal(Character character)
+        public SpellHeal(Character character)
         {
             SpellName = "Heal";
 

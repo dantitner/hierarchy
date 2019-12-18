@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hierarchy.Characters
 {
-    class Сommander : Character
+    public class Сommander : Character
     {
         public Сommander(string Name)
         {

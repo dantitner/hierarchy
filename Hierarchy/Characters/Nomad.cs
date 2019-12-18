@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hierarchy.Characters
 {
-    class Nomad : Character
+    public class Nomad : Character
     {
         public Nomad(string Name)
         {

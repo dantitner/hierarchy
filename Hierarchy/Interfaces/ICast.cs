@@ -4,7 +4,7 @@ using System.Text;
 using Hierarchy.Util;
 namespace Hierarchy.Interfaces
 {
-    interface ISpell
+    public interface ICast
     {
         void Cast(Entity target);
 

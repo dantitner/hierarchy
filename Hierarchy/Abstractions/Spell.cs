@@ -5,7 +5,7 @@ using Hierarchy.Util;
 
 namespace Hierarchy.Abstractions
 {
-    abstract class Spell
+    public abstract class Spell
     {
         public Character Caster { get; set; }
 

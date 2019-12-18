@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Hierarchy.Spells;
 namespace Hierarchy.Characters
 {
-    class Druid : Character
+    public class Druid : Character
     {
         public Druid(string Name)
         {
@@ -16,7 +16,12 @@ namespace Hierarchy.Characters
             Armor = 0.5;
             Resist = 0.6;
             //добавить спелл вызова духа
+
             //добавить спелл лечения
+            //Spells.Add(new SpellHeal(this));
+
+            
         }
+
     }
 }

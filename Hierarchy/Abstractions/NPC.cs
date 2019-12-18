@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hierarchy
 {
-    abstract class NPC : Entity
+    public abstract class NPC : Entity
     {
         public Character Owner { get; set; }
     }

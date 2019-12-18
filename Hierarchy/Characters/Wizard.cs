@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hierarchy.Characters
 {
-    class Wizard : Character
+    public class Wizard : Character
     {
         public Wizard(string Name)
         {
@@ -15,7 +15,7 @@ namespace Hierarchy.Characters
             Attack = 8;
             Armor = 0.0;
             Resist = 0.5;
-            //добавить спелл вызова зомби
+            
         }
     }
 }

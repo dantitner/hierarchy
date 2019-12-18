@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hierarchy
 {
-    abstract class Entity
+    public abstract class Entity
     {
         public int HP { get; set; }
         public int Mana { get; set; }
@@ -13,5 +13,7 @@ namespace Hierarchy
 
         public double Armor { get; set; }
         public double Resist { get; set; }
+
+        public int Gold { get; set; }
     }
 }
