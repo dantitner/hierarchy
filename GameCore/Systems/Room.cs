@@ -11,7 +11,12 @@ namespace GameCore.Systems
         public EndRoomDelegate endRoomDelegate;
 
 
-        Queue<IEvent> RoomEvents = new Queue<IEvent>();
+        Queue<IEvent> RoomEvents;
+
+        public Room()
+        {
+            RoomEvents = new Queue<IEvent>();
+        }
 
         public void NextStep()
         {
@@ -20,7 +25,7 @@ namespace GameCore.Systems
                 
                 RoomEvents.Peek().Execute();
                 RoomEvents.Dequeue();
-                GameManager.gm.CurrentRoom.NextStep();
+                NextStep();
             }
             else
                 endRoomDelegate.Invoke();

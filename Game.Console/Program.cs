@@ -4,6 +4,9 @@ using System;
 using GameCore.Systems;
 using Hierarchy;
 using Hierarchy.Characters;
+using Microsoft.Extensions.DependencyInjection;
+using Unity;
+using GameCore.Abstractions;
 
 namespace Game.Console
 {
@@ -11,27 +14,28 @@ namespace Game.Console
     {
         static void Main(string[] args)
         {
-            GameManager GameManager = new GameManager();
-            GameManager.gm = GameManager;
-
-            Character Player = new Druid("Druid");
-            GameManager.PlayerCharacter = Player;
-
             Room room = new Room();
-            GameManager.gm.CurrentRoom = room;
+
+            var container = new UnityContainer();
+            container.RegisterType<IGameManager,GameManager>();
+            container.RegisterType<Character, Druid>();
+            var GameManager = container.Resolve<IGameManager>();
+            var Player = container.Resolve<Character>();
+
 
             StoryEvent intro = new StoryEvent("You enter ancient dungeon.");
             StoryEvent chest = new StoryEvent("You found old chest.");
+
             chest.DoChoice = true;
             chest.Condition = "Do you want open the chest?";
             chest.ConditionPositive = delegate
             {
-                System.Console.WriteLine("You found 100 gold!");
-                GameManager.PlayerCharacter.Gold += 100;
+                ConsoleInput.Write("You found 100 gold!");
+                GameManager.GetCharacter().Gold += 100;
             };
             chest.ConditionNegative = delegate
             {
-                System.Console.WriteLine("You walk past it!");
+                ConsoleInput.Write("You walk past it!");
             };
             StoryEvent end = new StoryEvent("You at the deadend.");
 
@@ -41,10 +45,10 @@ namespace Game.Console
 
             room.endRoomDelegate = delegate 
             {
-                System.Console.WriteLine("Well, back to the camp!");
+                ConsoleInput.Write("Well, back to the camp!");
             };
 
-            GameManager.CurrentRoom.NextStep();
+            GameManager.GetCurrentRoom().NextStep();
 
         }
     }

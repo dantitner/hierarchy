@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace GameCore.Systems
 {
@@ -17,7 +18,7 @@ namespace GameCore.Systems
 
         public static bool? YesNoQuestion()
         {
-            Console.WriteLine("Type 'Y' for yes. Type 'N' for no.");
+            Write("Type 'Y' for yes. Type 'N' for no.");
             ConsoleKey consoleKey = Console.ReadKey().Key;
             bool? result = null;
             switch (consoleKey)
@@ -34,6 +35,15 @@ namespace GameCore.Systems
 
             return result;
 
+        }
+
+        public static void Write(string message)
+        {
+            foreach (var item in message)
+            {
+                Console.Write(item);
+                Thread.Sleep(100);
+            }
         }
     }
 }

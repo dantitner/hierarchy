@@ -38,10 +38,10 @@ namespace GameCore.Events
 
         public void Execute()
         {
-            Console.WriteLine(Message);
+            ConsoleInput.Write(Message);
             if (DoChoice)
             {
-                Console.WriteLine(Condition);
+                ConsoleInput.Write(Condition);
                 switch (ConsoleInput.YesNoQuestion())
                 {
                     case true:
