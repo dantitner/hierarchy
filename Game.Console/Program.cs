@@ -7,6 +7,7 @@ using Hierarchy.Characters;
 using Microsoft.Extensions.DependencyInjection;
 using Unity;
 using GameCore.Abstractions;
+using Unity.Injection;
 
 namespace Game.Console
 {
@@ -17,11 +18,11 @@ namespace Game.Console
             Room room = new Room();
 
             var container = new UnityContainer();
-            container.RegisterType<IGameManager,GameManager>();
-            container.RegisterType<Character, Druid>();
-            var GameManager = container.Resolve<IGameManager>();
-            var Player = container.Resolve<Character>();
 
+            container.RegisterType<Character, Druid>(new InjectionConstructor("Chad"));
+            var Player = container.Resolve<Character>();
+            container.RegisterType<IGameManager, GameManager>(new InjectionConstructor(Player,room));
+            var GameManager = container.Resolve<IGameManager>();
 
             StoryEvent intro = new StoryEvent("You enter ancient dungeon.");
             StoryEvent chest = new StoryEvent("You found old chest.");

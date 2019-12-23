@@ -39,11 +39,23 @@ namespace GameCore.Systems
 
         public static void Write(string message)
         {
-            foreach (var item in message)
+            for (int i = 0; i < message.Length; i++)
             {
-                Console.Write(item);
-                Thread.Sleep(100);
+                if (i == message.Length - 1)
+                {
+                    Console.WriteLine(message[i]);
+
+                }
+                else
+                {
+                    Console.Write(message[i]);
+
+                }
+                Thread.Sleep(25);
             }
+
+            
+
         }
     }
 }
