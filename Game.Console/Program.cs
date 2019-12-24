@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Unity;
 using GameCore.Abstractions;
 using Unity.Injection;
+using GameCore.Enum;
+using GameCore.Interfaces;
+using System.Text;
 
 namespace Game.Console
 {
@@ -15,34 +18,24 @@ namespace Game.Console
     {
         static void Main(string[] args)
         {
+            System.Console.OutputEncoding = Encoding.UTF8;
             Room room = new Room();
 
             var container = new UnityContainer();
 
             container.RegisterType<Character, Druid>(new InjectionConstructor("Chad"));
+
             var Player = container.Resolve<Character>();
+
             container.RegisterType<IGameManager, GameManager>(new InjectionConstructor(Player,room));
+            container.RegisterType<IEventFactory,EventsFactory>(new InjectionConstructor("StoryEvents.xml"));
+
             var GameManager = container.Resolve<IGameManager>();
+            var eventsFactory = container.Resolve<IEventFactory>();
 
-            StoryEvent intro = new StoryEvent("You enter ancient dungeon.");
-            StoryEvent chest = new StoryEvent("You found old chest.");
-
-            chest.DoChoice = true;
-            chest.Condition = "Do you want open the chest?";
-            chest.ConditionPositive = delegate
-            {
-                ConsoleInput.Write("You found 100 gold!");
-                GameManager.GetCharacter().Gold += 100;
-            };
-            chest.ConditionNegative = delegate
-            {
-                ConsoleInput.Write("You walk past it!");
-            };
-            StoryEvent end = new StoryEvent("You at the deadend.");
-
-            room.AddEventToRoom(intro);
-            room.AddEventToRoom(chest);
-            room.AddEventToRoom(end);
+            room.AddEventToRoom(eventsFactory.Generate(EventType.storyIntro));
+            room.AddEventToRoom(eventsFactory.Generate(EventType.storyChest));
+            room.AddEventToRoom(eventsFactory.Generate(EventType.storyOutro));
 
             room.endRoomDelegate = delegate 
             {

@@ -4,8 +4,10 @@ using System.Text;
 
 namespace GameCore.Interfaces
 {
-    public interface IFactory
+    public interface ILoader
     {
-        IEvent Generate<IEvent>();        
+        string LoadIntro();
+        string LoadOutro();
+        string LoadChest();
     }
 }

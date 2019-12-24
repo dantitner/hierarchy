@@ -4,6 +4,7 @@ using System.Text;
 using GameCore.EventArguments;
 using GameCore.Interfaces;
 using GameCore.Systems;
+using GameCore.Util;
 
 namespace GameCore.Events
 {
@@ -11,7 +12,9 @@ namespace GameCore.Events
     {
         public string Message { get; set; }
         public bool DoChoice { get; set; }
+        public bool RollDice { get; set; }
         public string Condition { get; set; }
+
 
         public StoryEvent(string message)
         {
@@ -42,24 +45,28 @@ namespace GameCore.Events
             if (DoChoice)
             {
                 ConsoleInput.Write(Condition);
-                switch (ConsoleInput.YesNoQuestion())
+                if (!RollDice)
                 {
-                    case true:
-                        ConditionPositive.Invoke();
-                        break;
-                    case false:
-                        ConditionNegative.Invoke();
-                        break;
-                    default:
-                        break;
+                    switch (ConsoleInput.YesNoQuestion())
+                    {
+                        case true:
+                            ConditionPositive.Invoke();
+                            break;
+                        case false:
+                            ConditionNegative.Invoke();
+                            break;
+                        default:
+                            break;
+                    }
                 }
-
-                
-            }
-
-            
+                else
+                {
+                    if (Dice.RollDice())
+                        ConditionPositive.Invoke();
+                    else
+                        ConditionNegative.Invoke();
+                }   
+            }   
         }
-
-
     }
 }
