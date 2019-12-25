@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using GameCore.EventArguments;
 using GameCore.Interfaces;
 using GameCore.Systems;
@@ -21,23 +19,10 @@ namespace GameCore.Events
             Message = message;
         }
 
-        public event EventHandler<MessageEventArgs> ShowMessage;
-
-        public void OnEvent(string message)
-        {
-            MessageEventArgs messageEventArgs = new MessageEventArgs(message);
-            ShowMessage?.Invoke(this, messageEventArgs);
-        }
-
         public delegate void ConditionDelegate();
 
         public ConditionDelegate ConditionPositive { get; set; }
         public ConditionDelegate ConditionNegative { get; set; }
-
-        public void Drop()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Execute()
         {

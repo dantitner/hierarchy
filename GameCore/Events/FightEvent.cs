@@ -7,10 +7,6 @@ namespace GameCore.Events
 {
     public class FightEvent : IEvent
     {
-        public void Drop()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Execute()
         {
