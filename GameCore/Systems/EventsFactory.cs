@@ -10,10 +10,12 @@ namespace GameCore.Systems
 {
     public class EventsFactory : IEventFactory
     {
+        private readonly GameManager _gameManager;
         private readonly string _xmlPath;
 
-        public EventsFactory(string xmlPath)
+        public EventsFactory(string xmlPath, GameManager gameManager)
         {
+            _gameManager = gameManager;
             _xmlPath = xmlPath;
         }
 
@@ -37,7 +39,7 @@ namespace GameCore.Systems
                     chestEvent.ConditionPositive = delegate 
                     {
                         ConsoleInput.Write($"Внутри ты нашел {goldAmount} золота.");
-                        //обратиться  к гейм менеджеру и добавить золото игроку
+                        _gameManager.GetCharacter().Gold += goldAmount;
                     };
                     chestEvent.ConditionNegative = delegate
                     {

@@ -24,13 +24,12 @@ namespace Game.Console
             var container = new UnityContainer();
 
             container.RegisterType<Character, Druid>(new InjectionConstructor("Chad"));
-
             var Player = container.Resolve<Character>();
 
             container.RegisterType<IGameManager, GameManager>(new InjectionConstructor(Player,room));
-            container.RegisterType<IEventFactory,EventsFactory>(new InjectionConstructor("StoryEvents.xml"));
-
             var GameManager = container.Resolve<IGameManager>();
+
+            container.RegisterType<IEventFactory,EventsFactory>(new InjectionConstructor("StoryEvents.xml", GameManager));
             var eventsFactory = container.Resolve<IEventFactory>();
 
             room.AddEventToRoom(eventsFactory.Generate(EventType.storyIntro));
