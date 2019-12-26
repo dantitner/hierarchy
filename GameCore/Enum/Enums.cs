@@ -4,8 +4,13 @@ using System.Text;
 
 namespace GameCore.Enum
 {
-    public enum EventType
+    public enum EventMessageType
     {
-        storyIntro,storyOutro,storyChest,StoryTrap,fight
+        storyIntro,storyOutro
+    }
+
+    public enum EventActionType
+    {
+       storyChest, StoryTrap, fight
     }
 }

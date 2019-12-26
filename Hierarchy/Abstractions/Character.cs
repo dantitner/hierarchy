@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Hierarchy.Interfaces;
-
 namespace Hierarchy
 {
     public abstract class Character : Entity
@@ -15,6 +14,19 @@ namespace Hierarchy
         {
             OwnedNPCs = new List<NPC>();
            
+        }
+
+        public void AddGold(int gold)
+        {
+            Gold += gold;
+        }
+
+        public int AddRandomGold(int min,int max)
+        {
+            Random random = new Random();
+            int randomGold = random.Next(min,max);
+            AddGold(randomGold);
+            return randomGold;
         }
     }
 }

@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using static GameCore.Events.StoryChest;
+
 namespace GameCore.Interfaces
 {
     public interface IEventFactory
     {
-        IEvent Generate(EventType eventType);        
+        IEvent GenerateMessage(EventMessageType eventType);
+        IEvent GenerateWithCondition(EventActionType eventType, AddGoldDelegate conditionPositive);
     }
 }

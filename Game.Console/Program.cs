@@ -23,18 +23,14 @@ namespace Game.Console
 
             var container = new UnityContainer();
 
+            container.RegisterType<IEventFactory, EventsFactory>(new InjectionConstructor("StoryEvents.xml"));
+            var eventsFactory = container.Resolve<IEventFactory>();
+
             container.RegisterType<Character, Druid>(new InjectionConstructor("Chad"));
             var Player = container.Resolve<Character>();
 
-            container.RegisterType<IGameManager, GameManager>(new InjectionConstructor(Player,room));
+            container.RegisterType<IGameManager, GameManager>(new InjectionConstructor(Player,room, eventsFactory));
             var GameManager = container.Resolve<IGameManager>();
-
-            container.RegisterType<IEventFactory,EventsFactory>(new InjectionConstructor("StoryEvents.xml", GameManager));
-            var eventsFactory = container.Resolve<IEventFactory>();
-
-            room.AddEventToRoom(eventsFactory.Generate(EventType.storyIntro));
-            room.AddEventToRoom(eventsFactory.Generate(EventType.storyChest));
-            room.AddEventToRoom(eventsFactory.Generate(EventType.storyOutro));
 
             room.endRoomDelegate = delegate 
             {
@@ -42,7 +38,6 @@ namespace Game.Console
             };
 
             GameManager.GetCurrentRoom().NextStep();
-
         }
     }
 }

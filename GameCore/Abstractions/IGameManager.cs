@@ -10,5 +10,6 @@ namespace GameCore.Abstractions
     {
         Room GetCurrentRoom();
         Character GetCharacter();
+        void GenerateEvents();
     }
 }
